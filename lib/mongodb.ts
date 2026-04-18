@@ -1,4 +1,12 @@
 import mongoose from 'mongoose';
+import dns from 'node:dns/promises';
+
+// Explicitly set DNS servers to resolve MongoDB SRV issues
+try {
+    dns.setServers(['8.8.8.8', '1.1.1.1']);
+} catch (e) {
+    console.warn('Failed to set DNS servers:', e);
+}
 
 // Define the connection cache type
 type MongooseCache = {
@@ -12,7 +20,7 @@ declare global {
     var mongoose: MongooseCache | undefined;
 }
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URL;
 
 
 // Initialize the cache on the global object to persist across hot reloads in development
