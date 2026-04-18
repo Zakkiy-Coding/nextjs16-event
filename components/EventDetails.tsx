@@ -60,7 +60,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
             return notFound();
         }
     } catch (error) {
-        console.error('Error fetching event:', error);
+        console.error('Error fetching events:', error);
         return notFound();
     }
 
